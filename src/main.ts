@@ -8,7 +8,12 @@
 //                       輪廻転生ポイント（消えない資産）がもらえる。
 //   アップグレード   → 徳を消費して、必要クリック回数を減らす（1回だけ購入可）。
 
-import { resetOmikuji, drawOmikuji } from "./omikuji";
+import {
+  resetOmikuji,
+  drawOmikuji,
+  getRemainingCount,
+  getRemainingCounts,
+} from "./omikuji";
 import { handleClickForDraw, DEFAULT_REQUIRED_CLICKS } from "./clickcount";
 import { addTokensForResult, getTokenCount } from "./tokens";
 import {
@@ -19,6 +24,7 @@ import {
   renderReincarnateButton,
   renderReincarnationPoints,
   renderLuckUpgradeButton,
+  renderRemaining,
 } from "./render";
 import {
   buyClickUpgrade,
@@ -44,6 +50,8 @@ function main(): void {
 
   renderUpgradeButton(CLICK_UPGRADE_COST, isClickUpgradePurchased());
 
+  renderRemaining(getRemainingCount(), getRemainingCounts());
+
   renderLuckUpgradeButton(LUCK_UPGRADE_COST, isLuckUpgradePurchased());
 
   const drawButton = document.getElementById("draw-button");
@@ -56,6 +64,7 @@ function main(): void {
     if (canDraw) {
       const result = drawOmikuji();
       renderResult(result);
+      renderRemaining(getRemainingCount(), getRemainingCounts());
       // この draw で箱が空になった可能性があるので、毎回ボタンの状態を更新する。
       renderReincarnateButton(canReincarnate());
 
@@ -80,6 +89,7 @@ function main(): void {
       renderUpgradeButton(CLICK_UPGRADE_COST, isClickUpgradePurchased());
       renderReincarnationPoints(getReincarnationPoints());
       renderReincarnateButton(canReincarnate());
+      renderRemaining(getRemainingCount(), getRemainingCounts());
     }
   });
 
@@ -91,6 +101,7 @@ function main(): void {
     if (success) {
       renderTokens(getTokenCount());
       renderUpgradeButton(CLICK_UPGRADE_COST, isClickUpgradePurchased());
+      renderRemaining(getRemainingCount(), getRemainingCounts());
     }
   });
 

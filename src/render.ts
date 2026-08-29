@@ -100,3 +100,20 @@ export function renderLuckUpgradeButton(
     luckUpgradeButton.disabled = purchased;
   }
 }
+
+// 残り枚数と、結果ごとの内訳をまとめて表示する。
+export function renderRemaining(
+  count: number,
+  counts: Record<OmikujiResult, number>,
+): void {
+  const remainingElement = document.getElementById("remaining");
+  if (remainingElement) {
+    // 「大吉:4 中吉:14 ...」のような内訳文字列を、1種類ずつ追記して組み立てる。
+    let breakdownText = "";
+    for (const [result, resultCount] of Object.entries(counts)) {
+      breakdownText += `${result}:${resultCount} `;
+    }
+
+    remainingElement.textContent = `残り ${count} 枚 (${breakdownText.trim()})`;
+  }
+}
