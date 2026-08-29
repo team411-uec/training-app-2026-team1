@@ -83,3 +83,20 @@ export function renderReincarnationPoints(points: number): void {
     pointsElement.textContent = `輪廻転生ポイント: ${points}`;
   }
 }
+
+// 輪廻転生アップグレードボタンの文言と押せる/押せない状態を更新する。
+export function renderLuckUpgradeButton(
+  cost: number,
+  purchased: boolean,
+): void {
+  const luckUpgradeButton = document.getElementById(
+    "luck-upgrade-button",
+  ) as HTMLButtonElement | null;
+
+  if (luckUpgradeButton) {
+    luckUpgradeButton.textContent = purchased
+      ? "購入済み"
+      : `大吉の比率を上げる（${cost} 輪廻転生ポイント）`;
+    luckUpgradeButton.disabled = purchased;
+  }
+}

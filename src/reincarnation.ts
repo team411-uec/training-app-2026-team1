@@ -42,3 +42,14 @@ export function reincarnate(): boolean {
 
   return true;
 }
+
+// 輪廻転生ポイントを消費する。tokens.ts の spendTokens と同じパターン。
+// 足りなければ何もせず false、足りていれば引いて true を返す。
+export function spendReincarnationPoints(amount: number): boolean {
+  if (reincarnationPoint < amount) {
+    return false;
+  }
+
+  reincarnationPoint -= amount;
+  return true;
+}

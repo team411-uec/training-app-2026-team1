@@ -18,6 +18,7 @@ import {
   renderUpgradeButton,
   renderReincarnateButton,
   renderReincarnationPoints,
+  renderLuckUpgradeButton,
 } from "./render";
 import {
   buyClickUpgrade,
@@ -29,6 +30,11 @@ import {
   getReincarnationPoints,
   reincarnate,
 } from "./reincarnation";
+import {
+  buyLuckUpgrade,
+  isLuckUpgradePurchased,
+  LUCK_UPGRADE_COST,
+} from "./reincarnationUpgrades";
 
 function main(): void {
   // おみくじ箱を用意する（1回呼ぶと、くじが入った状態になる）。
@@ -37,6 +43,8 @@ function main(): void {
   renderReincarnationPoints(getReincarnationPoints());
 
   renderUpgradeButton(CLICK_UPGRADE_COST, isClickUpgradePurchased());
+
+  renderLuckUpgradeButton(LUCK_UPGRADE_COST, isLuckUpgradePurchased());
 
   const drawButton = document.getElementById("draw-button");
 
@@ -83,6 +91,16 @@ function main(): void {
     if (success) {
       renderTokens(getTokenCount());
       renderUpgradeButton(CLICK_UPGRADE_COST, isClickUpgradePurchased());
+    }
+  });
+
+  const luckUpgradeButton = document.getElementById("luck-upgrade-button");
+  luckUpgradeButton?.addEventListener("click", () => {
+    const success = buyLuckUpgrade();
+
+    if (success) {
+      renderReincarnationPoints(getReincarnationPoints());
+      renderLuckUpgradeButton(LUCK_UPGRADE_COST, isLuckUpgradePurchased());
     }
   });
 }

@@ -16,7 +16,11 @@ export const omikujiRatios: Record<OmikujiResult, number> = {
   末吉: 20,
   凶: 10,
 };
-
+// 輪廻転生の永続アップグレードなど、外部から比率を変えたいときの入口関数。
+// omikujiRatios を直接書き換えさせず、必ずここを通す（マイナスにならない安全策も一括で効かせるため）。
+export function adjustRatio(result: OmikujiResult, amount: number): void {
+  omikujiRatios[result] = Math.max(0, omikujiRatios[result] + amount);
+}
 // 箱の中身（引けるくじ）。このファイルの中だけで使う。
 // export していないので外部からは直接触れず、下の関数を通して操作する。
 let tickets: OmikujiResult[] = [];
