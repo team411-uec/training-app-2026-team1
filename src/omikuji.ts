@@ -59,3 +59,28 @@ export function drawOmikuji(): OmikujiResult | null {
 export function isOmikujiBoxEmpty(): boolean {
   return tickets.length === 0;
 }
+
+// 残り枚数（合計）。isOmikujiBoxEmpty と同じく tickets.length を返すだけ。
+export function getRemainingCount(): number {
+  return tickets.length;
+}
+
+// 結果ごとの残り枚数の内訳を返す。
+// omikujiRatios と同じ形（6種類すべて0で初期化）にしてから、
+// tickets の中身を1枚ずつ数え上げていく。
+export function getRemainingCounts(): Record<OmikujiResult, number> {
+  const counts: Record<OmikujiResult, number> = {
+    大吉: 0,
+    中吉: 0,
+    小吉: 0,
+    吉: 0,
+    末吉: 0,
+    凶: 0,
+  };
+
+  for (const ticket of tickets) {
+    counts[ticket] += 1;
+  }
+
+  return counts;
+}
