@@ -4,7 +4,7 @@
 // upgrades.ts との違い: ここの購入状態は輪廻転生でリセットされない
 // （reincarnation.ts の reincarnate() から reset 関数を呼ばれることは一切ない）。
 
-import { adjustRatio, omikujiRatios } from "./omikuji";
+import { adjustRatio, omikujiRatios, resetOmikuji } from "./omikuji";
 import { spendReincarnationPoints } from "./reincarnation";
 
 export const LUCK_UPGRADE_COST = 1;
@@ -29,6 +29,7 @@ export function buyLuckUpgrade1(): boolean {
   const amount = omikujiRatios["末吉"];
   adjustRatio("大吉", amount);
   adjustRatio("末吉", -amount);
+  resetOmikuji();
   luckUpgrade1Purchased = true;
   return true;
 }
@@ -53,6 +54,7 @@ export function buyLuckUpgrade2(): boolean {
   const amount = omikujiRatios["吉"];
   adjustRatio("大吉", amount);
   adjustRatio("吉", -amount);
+  resetOmikuji();
   luckUpgrade2Purchased = true;
   return true;
 }
@@ -77,6 +79,7 @@ export function buyLuckUpgrade3(): boolean {
   const amount = omikujiRatios["小吉"];
   adjustRatio("大吉", amount);
   adjustRatio("小吉", -amount);
+  resetOmikuji();
   luckUpgrade3Purchased = true;
   return true;
 }
@@ -101,6 +104,7 @@ export function buyLuckUpgrade4(): boolean {
   const amount = omikujiRatios["中吉"];
   adjustRatio("大吉", amount);
   adjustRatio("中吉", -amount);
+  resetOmikuji();
   luckUpgrade4Purchased = true;
   return true;
 }
@@ -125,6 +129,7 @@ export function buyLuckUpgrade5(): boolean {
   const amount = omikujiRatios["凶"];
   adjustRatio("大吉", amount);
   adjustRatio("凶", -amount);
+  resetOmikuji();
   luckUpgrade5Purchased = true;
   return true;
 }
