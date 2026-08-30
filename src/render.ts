@@ -4,24 +4,26 @@
 
 import type { OmikujiResult } from "./omikuji";
 
-// ステップ1（最初の課題）: この関数を実装する。
-//
-// いまは「引く」ボタンを押すと開発者ツール(F12)の Console に
-// 「引いた結果: 大吉」と出るが、画面の文字は変わらない。
-// この関数の中身が空だからで、ここに DOM 操作を書けば画面に反映される。
-//
-// ヒント:
-//  - 表示先は index.html の id="result" の要素。document.getElementById で取れる。
-//  - 要素の中の文字は textContent で書き換えられる。
-//  - result が null のとき（リセット直後など）は初期メッセージを出す。
+// 結果ごとの色付けクラス。omikuji-result（共通の見た目）に、この中の1つを追加する。
+const resultColorClasses: Record<OmikujiResult, string> = {
+  大吉: "result-daikichi",
+  中吉: "result-chukichi",
+  小吉: "result-shokichi",
+  吉: "result-kichi",
+  末吉: "result-sueyoshi",
+  凶: "result-kyou",
+};
+
 export function renderResult(result: OmikujiResult | null): void {
-  // ステップ0 ではコンソールに結果が出るだけ。
   console.log("引いた結果:", result);
 
-  // TODO（ステップ1）: ここに DOM 操作を書いて、画面に結果を表示する。
   const resultElement = document.getElementById("result");
   if (resultElement) {
     resultElement.textContent = result === null ? "ここに結果が出ます" : result;
+    resultElement.className =
+      result === null
+        ? "omikuji-result"
+        : `omikuji-result ${resultColorClasses[result]}`;
   }
 }
 
