@@ -1,32 +1,23 @@
 // 輪廻転生アップグレード層 (reincarnationUpgrades.ts)
-// 徳ではなく「輪廻転生ポイント」で買うアップグレードをまとめる。
-// upgrades.ts との決定的な違い: ここの購入状態は輪廻転生でリセットされない
+// 輪廻転生ポイントで買うアップグレードをまとめる。5種類あり、それぞれ1回だけ買える。
+// 買うと、対象の結果の残り枚数をまるごと大吉に移す（対象を0にし、その分だけ大吉を増やす）。
+// upgrades.ts との違い: ここの購入状態は輪廻転生でリセットされない
 // （reincarnation.ts の reincarnate() から reset 関数を呼ばれることは一切ない）。
-// 転生しても効果が残り続けるのが、このポイントの存在意義だから。
 
-import { adjustRatio } from "./omikuji";
+import { adjustRatio, omikujiRatios } from "./omikuji";
 import { spendReincarnationPoints } from "./reincarnation";
 
-// このアップグレードの値段（輪廻転生ポイント）。
 export const LUCK_UPGRADE_COST = 1;
-// 大吉の比率をいくつ増やすか。
-const INCREASE_AMOUNT = 5;
-// 吉の比率をいくつ減らすか（大吉が増えた分、他を減らしてバランスを取る）。
-const DECREASE_AMOUNT = 5;
 
-// 買ったかどうか。今は1回だけ買える方式。
-let luckUpgradePurchased = false;
+// --- 1: 末吉 を 大吉 に変える ---
+let luckUpgrade1Purchased = false;
 
-export function isLuckUpgradePurchased(): boolean {
-  return luckUpgradePurchased;
+export function isLuckUpgrade1Purchased(): boolean {
+  return luckUpgrade1Purchased;
 }
 
-// ボタンが押されたときに main.ts から呼ばれる。
-// 1. 購入済みなら何もしない
-// 2. ポイントが足りなければ何もしない
-// 3. 両方クリアしたら、大吉を増やして吉を減らし、購入済みにする
-export function buyLuckUpgrade(): boolean {
-  if (luckUpgradePurchased) {
+export function buyLuckUpgrade1(): boolean {
+  if (luckUpgrade1Purchased) {
     return false;
   }
 
@@ -35,8 +26,105 @@ export function buyLuckUpgrade(): boolean {
     return false;
   }
 
-  adjustRatio("大吉", INCREASE_AMOUNT);
-  adjustRatio("吉", -DECREASE_AMOUNT);
-  luckUpgradePurchased = true;
+  const amount = omikujiRatios["末吉"];
+  adjustRatio("大吉", amount);
+  adjustRatio("末吉", -amount);
+  luckUpgrade1Purchased = true;
+  return true;
+}
+
+// --- 2: 吉 を 大吉 に変える ---
+let luckUpgrade2Purchased = false;
+
+export function isLuckUpgrade2Purchased(): boolean {
+  return luckUpgrade2Purchased;
+}
+
+export function buyLuckUpgrade2(): boolean {
+  if (luckUpgrade2Purchased) {
+    return false;
+  }
+
+  const success = spendReincarnationPoints(LUCK_UPGRADE_COST);
+  if (!success) {
+    return false;
+  }
+
+  const amount = omikujiRatios["吉"];
+  adjustRatio("大吉", amount);
+  adjustRatio("吉", -amount);
+  luckUpgrade2Purchased = true;
+  return true;
+}
+
+// --- 3: 小吉 を 大吉 に変える ---
+let luckUpgrade3Purchased = false;
+
+export function isLuckUpgrade3Purchased(): boolean {
+  return luckUpgrade3Purchased;
+}
+
+export function buyLuckUpgrade3(): boolean {
+  if (luckUpgrade3Purchased) {
+    return false;
+  }
+
+  const success = spendReincarnationPoints(LUCK_UPGRADE_COST);
+  if (!success) {
+    return false;
+  }
+
+  const amount = omikujiRatios["小吉"];
+  adjustRatio("大吉", amount);
+  adjustRatio("小吉", -amount);
+  luckUpgrade3Purchased = true;
+  return true;
+}
+
+// --- 4: 中吉 を 大吉 に変える ---
+let luckUpgrade4Purchased = false;
+
+export function isLuckUpgrade4Purchased(): boolean {
+  return luckUpgrade4Purchased;
+}
+
+export function buyLuckUpgrade4(): boolean {
+  if (luckUpgrade4Purchased) {
+    return false;
+  }
+
+  const success = spendReincarnationPoints(LUCK_UPGRADE_COST);
+  if (!success) {
+    return false;
+  }
+
+  const amount = omikujiRatios["中吉"];
+  adjustRatio("大吉", amount);
+  adjustRatio("中吉", -amount);
+  luckUpgrade4Purchased = true;
+  return true;
+}
+
+// --- 5: 凶 を 大吉 に変える ---
+let luckUpgrade5Purchased = false;
+
+export function isLuckUpgrade5Purchased(): boolean {
+  return luckUpgrade5Purchased;
+}
+
+export function buyLuckUpgrade5(): boolean {
+  if (luckUpgrade5Purchased) {
+    return false;
+  }
+
+  const success = spendReincarnationPoints(LUCK_UPGRADE_COST);
+  if (!success) {
+    return false;
+  }
+
+  const amount = omikujiRatios["凶"];
+  adjustRatio("大吉", amount);
+  adjustRatio("凶", -amount);
+  luckUpgrade5Purchased = true;
   return true;
 }
