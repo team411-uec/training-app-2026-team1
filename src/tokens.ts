@@ -7,7 +7,7 @@ import type { OmikujiResult } from "./omikuji";
 // 結果ごとにもらえる徳の量。omikuji.ts の omikujiRatios と同じ考え方で、
 // 箱の中で少ない（レアな）結果ほど多くの徳がもらえるようにしている。
 const tokenValues: Record<OmikujiResult, number> = {
-  大吉: 50,
+  大吉: 100,
   中吉: 30,
   小吉: 20,
   吉: 10,

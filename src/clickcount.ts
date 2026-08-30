@@ -3,7 +3,7 @@
 // おみくじの中身（何が出るか）は omikuji.ts の責任なので、ここでは触らない。
 
 // 何回押したら引けるかの初期値。輪廻転生でこの値に戻すため、名前付きの定数にしている。
-export const DEFAULT_REQUIRED_CLICKS = 10;
+export const DEFAULT_REQUIRED_CLICKS = 5;
 
 // 「あと何回で引けるか」の基準値。upgrades.ts の decreaseRequiredClicks でのみ変更される。
 let requiredClicks = DEFAULT_REQUIRED_CLICKS;

@@ -51,16 +51,59 @@ export function renderTokens(tokenCount: number): void {
 
 // アップグレードボタンの文言と押せる/押せない状態を更新する。
 // .disabled を扱うため HTMLButtonElement として型キャストしている。
-export function renderUpgradeButton(cost: number, purchased: boolean): void {
-  const upgradeButton = document.getElementById(
-    "upgrade-button",
+// 徳アップグレード1: 必要クリック回数を1減らすボタン。
+export function renderUpgradeButton1(cost: number, purchased: boolean): void {
+  const button = document.getElementById(
+    "upgrade-button-1",
   ) as HTMLButtonElement | null;
 
-  if (upgradeButton) {
-    upgradeButton.textContent = purchased
+  if (button) {
+    button.textContent = purchased
       ? "購入済み"
-      : `必要クリック回数を9減らす(${cost} 徳)`;
-    upgradeButton.disabled = purchased;
+      : `必要クリック回数を1減らす(${cost} 徳)`;
+    button.disabled = purchased;
+  }
+}
+
+// 徳アップグレード2: 必要クリック回数を1減らすボタン。
+export function renderUpgradeButton2(cost: number, purchased: boolean): void {
+  const button = document.getElementById(
+    "upgrade-button-2",
+  ) as HTMLButtonElement | null;
+
+  if (button) {
+    button.textContent = purchased
+      ? "購入済み"
+      : `必要クリック回数を1減らす(${cost} 徳)`;
+    button.disabled = purchased;
+  }
+}
+
+// 徳アップグレード3: 必要クリック回数を1減らすボタン。
+export function renderUpgradeButton3(cost: number, purchased: boolean): void {
+  const button = document.getElementById(
+    "upgrade-button-3",
+  ) as HTMLButtonElement | null;
+
+  if (button) {
+    button.textContent = purchased
+      ? "購入済み"
+      : `必要クリック回数を1減らす(${cost} 徳)`;
+    button.disabled = purchased;
+  }
+}
+
+// 徳アップグレード4: 必要クリック回数を1減らすボタン。
+export function renderUpgradeButton4(cost: number, purchased: boolean): void {
+  const button = document.getElementById(
+    "upgrade-button-4",
+  ) as HTMLButtonElement | null;
+
+  if (button) {
+    button.textContent = purchased
+      ? "購入済み"
+      : `必要クリック回数を1減らす(${cost} 徳)`;
+    button.disabled = purchased;
   }
 }
 
@@ -84,20 +127,88 @@ export function renderReincarnationPoints(points: number): void {
   }
 }
 
-// 輪廻転生アップグレードボタンの文言と押せる/押せない状態を更新する。
-export function renderLuckUpgradeButton(
+// 輪廻転生アップグレード1: 末吉を大吉に変えるボタン。
+export function renderLuckUpgradeButton1(
   cost: number,
   purchased: boolean,
 ): void {
-  const luckUpgradeButton = document.getElementById(
-    "luck-upgrade-button",
+  const button = document.getElementById(
+    "luck-upgrade-button-1",
   ) as HTMLButtonElement | null;
 
-  if (luckUpgradeButton) {
-    luckUpgradeButton.textContent = purchased
+  if (button) {
+    button.textContent = purchased
       ? "購入済み"
-      : `大吉の比率を上げる（${cost} 輪廻転生ポイント）`;
-    luckUpgradeButton.disabled = purchased;
+      : `末吉を大吉に変える（${cost} 輪廻転生ポイント）`;
+    button.disabled = purchased;
+  }
+}
+
+// 輪廻転生アップグレード2: 吉を大吉に変えるボタン。
+export function renderLuckUpgradeButton2(
+  cost: number,
+  purchased: boolean,
+): void {
+  const button = document.getElementById(
+    "luck-upgrade-button-2",
+  ) as HTMLButtonElement | null;
+
+  if (button) {
+    button.textContent = purchased
+      ? "購入済み"
+      : `吉を大吉に変える（${cost} 輪廻転生ポイント）`;
+    button.disabled = purchased;
+  }
+}
+
+// 輪廻転生アップグレード3: 小吉を大吉に変えるボタン。
+export function renderLuckUpgradeButton3(
+  cost: number,
+  purchased: boolean,
+): void {
+  const button = document.getElementById(
+    "luck-upgrade-button-3",
+  ) as HTMLButtonElement | null;
+
+  if (button) {
+    button.textContent = purchased
+      ? "購入済み"
+      : `小吉を大吉に変える（${cost} 輪廻転生ポイント）`;
+    button.disabled = purchased;
+  }
+}
+
+// 輪廻転生アップグレード4: 中吉を大吉に変えるボタン。
+export function renderLuckUpgradeButton4(
+  cost: number,
+  purchased: boolean,
+): void {
+  const button = document.getElementById(
+    "luck-upgrade-button-4",
+  ) as HTMLButtonElement | null;
+
+  if (button) {
+    button.textContent = purchased
+      ? "購入済み"
+      : `中吉を大吉に変える（${cost} 輪廻転生ポイント）`;
+    button.disabled = purchased;
+  }
+}
+
+// 輪廻転生アップグレード5: 凶を大吉に変えるボタン。
+export function renderLuckUpgradeButton5(
+  cost: number,
+  purchased: boolean,
+): void {
+  const button = document.getElementById(
+    "luck-upgrade-button-5",
+  ) as HTMLButtonElement | null;
+
+  if (button) {
+    button.textContent = purchased
+      ? "購入済み"
+      : `凶を大吉に変える（${cost} 輪廻転生ポイント）`;
+    button.disabled = purchased;
   }
 }
 

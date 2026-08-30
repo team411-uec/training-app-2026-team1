@@ -20,16 +20,32 @@ import {
   renderClickProgress,
   renderResult,
   renderTokens,
-  renderUpgradeButton,
+  renderUpgradeButton1,
+  renderUpgradeButton2,
+  renderUpgradeButton3,
+  renderUpgradeButton4,
   renderReincarnateButton,
   renderReincarnationPoints,
-  renderLuckUpgradeButton,
+  renderLuckUpgradeButton1,
+  renderLuckUpgradeButton2,
+  renderLuckUpgradeButton3,
+  renderLuckUpgradeButton4,
+  renderLuckUpgradeButton5,
   renderRemaining,
 } from "./render";
 import {
-  buyClickUpgrade,
-  CLICK_UPGRADE_COST,
-  isClickUpgradePurchased,
+  buyClickUpgrade1,
+  buyClickUpgrade2,
+  buyClickUpgrade3,
+  buyClickUpgrade4,
+  isClickUpgrade1Purchased,
+  isClickUpgrade2Purchased,
+  isClickUpgrade3Purchased,
+  isClickUpgrade4Purchased,
+  CLICK_UPGRADE_COST_1,
+  CLICK_UPGRADE_COST_2,
+  CLICK_UPGRADE_COST_3,
+  CLICK_UPGRADE_COST_4,
 } from "./upgrades";
 import {
   canReincarnate,
@@ -37,8 +53,16 @@ import {
   reincarnate,
 } from "./reincarnation";
 import {
-  buyLuckUpgrade,
-  isLuckUpgradePurchased,
+  buyLuckUpgrade1,
+  buyLuckUpgrade2,
+  buyLuckUpgrade3,
+  buyLuckUpgrade4,
+  buyLuckUpgrade5,
+  isLuckUpgrade1Purchased,
+  isLuckUpgrade2Purchased,
+  isLuckUpgrade3Purchased,
+  isLuckUpgrade4Purchased,
+  isLuckUpgrade5Purchased,
   LUCK_UPGRADE_COST,
 } from "./reincarnationUpgrades";
 
@@ -48,11 +72,18 @@ function main(): void {
   renderReincarnateButton(canReincarnate());
   renderReincarnationPoints(getReincarnationPoints());
 
-  renderUpgradeButton(CLICK_UPGRADE_COST, isClickUpgradePurchased());
+  renderUpgradeButton1(CLICK_UPGRADE_COST_1, isClickUpgrade1Purchased());
+  renderUpgradeButton2(CLICK_UPGRADE_COST_2, isClickUpgrade2Purchased());
+  renderUpgradeButton3(CLICK_UPGRADE_COST_3, isClickUpgrade3Purchased());
+  renderUpgradeButton4(CLICK_UPGRADE_COST_4, isClickUpgrade4Purchased());
 
   renderRemaining(getRemainingCount(), getRemainingCounts());
 
-  renderLuckUpgradeButton(LUCK_UPGRADE_COST, isLuckUpgradePurchased());
+  renderLuckUpgradeButton1(LUCK_UPGRADE_COST, isLuckUpgrade1Purchased());
+  renderLuckUpgradeButton2(LUCK_UPGRADE_COST, isLuckUpgrade2Purchased());
+  renderLuckUpgradeButton3(LUCK_UPGRADE_COST, isLuckUpgrade3Purchased());
+  renderLuckUpgradeButton4(LUCK_UPGRADE_COST, isLuckUpgrade4Purchased());
+  renderLuckUpgradeButton5(LUCK_UPGRADE_COST, isLuckUpgrade5Purchased());
 
   const drawButton = document.getElementById("draw-button");
 
@@ -86,32 +117,112 @@ function main(): void {
       renderResult(null);
       renderClickProgress(0, DEFAULT_REQUIRED_CLICKS);
       renderTokens(getTokenCount());
-      renderUpgradeButton(CLICK_UPGRADE_COST, isClickUpgradePurchased());
+      renderUpgradeButton1(CLICK_UPGRADE_COST_1, isClickUpgrade1Purchased());
+      renderUpgradeButton2(CLICK_UPGRADE_COST_2, isClickUpgrade2Purchased());
+      renderUpgradeButton3(CLICK_UPGRADE_COST_3, isClickUpgrade3Purchased());
+      renderUpgradeButton4(CLICK_UPGRADE_COST_4, isClickUpgrade4Purchased());
       renderReincarnationPoints(getReincarnationPoints());
       renderReincarnateButton(canReincarnate());
       renderRemaining(getRemainingCount(), getRemainingCounts());
     }
   });
 
-  const upgradeButton = document.getElementById("upgrade-button");
-  upgradeButton?.addEventListener("click", () => {
-    // buyClickUpgrade() は購入済み、または徳が足りなければ何もせず false を返す。
-    const success = buyClickUpgrade();
+  const upgradeButton1 = document.getElementById("upgrade-button-1");
+  upgradeButton1?.addEventListener("click", () => {
+    const success = buyClickUpgrade1();
 
     if (success) {
       renderTokens(getTokenCount());
-      renderUpgradeButton(CLICK_UPGRADE_COST, isClickUpgradePurchased());
+      renderUpgradeButton1(CLICK_UPGRADE_COST_1, isClickUpgrade1Purchased());
       renderRemaining(getRemainingCount(), getRemainingCounts());
     }
   });
 
-  const luckUpgradeButton = document.getElementById("luck-upgrade-button");
-  luckUpgradeButton?.addEventListener("click", () => {
-    const success = buyLuckUpgrade();
+  const upgradeButton2 = document.getElementById("upgrade-button-2");
+  upgradeButton2?.addEventListener("click", () => {
+    const success = buyClickUpgrade2();
+
+    if (success) {
+      renderTokens(getTokenCount());
+      renderUpgradeButton2(CLICK_UPGRADE_COST_2, isClickUpgrade2Purchased());
+      renderRemaining(getRemainingCount(), getRemainingCounts());
+    }
+  });
+
+  const upgradeButton3 = document.getElementById("upgrade-button-3");
+  upgradeButton3?.addEventListener("click", () => {
+    const success = buyClickUpgrade3();
+
+    if (success) {
+      renderTokens(getTokenCount());
+      renderUpgradeButton3(CLICK_UPGRADE_COST_3, isClickUpgrade3Purchased());
+      renderRemaining(getRemainingCount(), getRemainingCounts());
+    }
+  });
+
+  const upgradeButton4 = document.getElementById("upgrade-button-4");
+  upgradeButton4?.addEventListener("click", () => {
+    const success = buyClickUpgrade4();
+
+    if (success) {
+      renderTokens(getTokenCount());
+      renderUpgradeButton4(CLICK_UPGRADE_COST_4, isClickUpgrade4Purchased());
+      renderRemaining(getRemainingCount(), getRemainingCounts());
+    }
+  });
+
+  const luckUpgradeButton1 = document.getElementById("luck-upgrade-button-1");
+  luckUpgradeButton1?.addEventListener("click", () => {
+    const success = buyLuckUpgrade1();
 
     if (success) {
       renderReincarnationPoints(getReincarnationPoints());
-      renderLuckUpgradeButton(LUCK_UPGRADE_COST, isLuckUpgradePurchased());
+      renderLuckUpgradeButton1(LUCK_UPGRADE_COST, isLuckUpgrade1Purchased());
+      renderRemaining(getRemainingCount(), getRemainingCounts());
+    }
+  });
+
+  const luckUpgradeButton2 = document.getElementById("luck-upgrade-button-2");
+  luckUpgradeButton2?.addEventListener("click", () => {
+    const success = buyLuckUpgrade2();
+
+    if (success) {
+      renderReincarnationPoints(getReincarnationPoints());
+      renderLuckUpgradeButton2(LUCK_UPGRADE_COST, isLuckUpgrade2Purchased());
+      renderRemaining(getRemainingCount(), getRemainingCounts());
+    }
+  });
+
+  const luckUpgradeButton3 = document.getElementById("luck-upgrade-button-3");
+  luckUpgradeButton3?.addEventListener("click", () => {
+    const success = buyLuckUpgrade3();
+
+    if (success) {
+      renderReincarnationPoints(getReincarnationPoints());
+      renderLuckUpgradeButton3(LUCK_UPGRADE_COST, isLuckUpgrade3Purchased());
+      renderRemaining(getRemainingCount(), getRemainingCounts());
+    }
+  });
+
+  const luckUpgradeButton4 = document.getElementById("luck-upgrade-button-4");
+  luckUpgradeButton4?.addEventListener("click", () => {
+    const success = buyLuckUpgrade4();
+
+    if (success) {
+      renderReincarnationPoints(getReincarnationPoints());
+      renderLuckUpgradeButton4(LUCK_UPGRADE_COST, isLuckUpgrade4Purchased());
+      renderRemaining(getRemainingCount(), getRemainingCounts());
+    }
+  });
+
+  const luckUpgradeButton5 = document.getElementById("luck-upgrade-button-5");
+  luckUpgradeButton5?.addEventListener("click", () => {
+    const success = buyLuckUpgrade5();
+
+    if (success) {
+      renderReincarnationPoints(getReincarnationPoints());
+      renderLuckUpgradeButton5(LUCK_UPGRADE_COST, isLuckUpgrade5Purchased());
+      renderRemaining(getRemainingCount(), getRemainingCounts());
     }
   });
 }
