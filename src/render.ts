@@ -37,7 +37,7 @@ export function renderHistory(result: OmikujiResult | null): void {
 
   const li = document.createElement("li");
   li.textContent = result;
-  historyUl.appendChild(li);
+  historyUl.prepend(li);
 }
 // クリック進捗（例: "3/10"）を表示する。clickcount.ts の handleClickForDraw の戻り値を
 // そのまま count / requiredClicks として受け取る想定。
