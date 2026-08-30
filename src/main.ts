@@ -19,6 +19,7 @@ import { addTokensForResult, getTokenCount } from "./tokens";
 import {
   renderClickProgress,
   renderResult,
+  renderHistory,
   renderTokens,
   renderUpgradeButton1,
   renderUpgradeButton2,
@@ -69,6 +70,7 @@ import {
 function main(): void {
   // おみくじ箱を用意する（1回呼ぶと、くじが入った状態になる）。
   resetOmikuji();
+  const history: string[] = [];
   renderReincarnateButton(canReincarnate());
   renderReincarnationPoints(getReincarnationPoints());
 
@@ -95,6 +97,12 @@ function main(): void {
     if (canDraw) {
       const result = drawOmikuji();
       renderResult(result);
+
+      if (result) {
+        history.push(result);
+        renderHistory(result);
+      }
+
       renderRemaining(getRemainingCount(), getRemainingCounts());
       // この draw で箱が空になった可能性があるので、毎回ボタンの状態を更新する。
       renderReincarnateButton(canReincarnate());
