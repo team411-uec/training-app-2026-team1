@@ -62,6 +62,15 @@
         background-color: #000000;
         color: #ffffff;
       }
+
+      .omikuji-history {
+        max-height: 150px;
+        overflow-y: auto;
+        margin: 8px 0;
+        padding: 8px 16px;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+      }
     </style>
   </head>
 
@@ -99,7 +108,6 @@
         - 引いた履歴を出す   → <ul id="history"> に <li> を足していく
     -->
     <div id="remaining" class="omikuji-remaining"></div>
-    <ul id="history" class="omikuji-history"></ul>
 
     <div id="click-progress" class="omikuji-remaining"></div>
 
@@ -107,6 +115,7 @@
 
     <div id="reincarnation-points" class="omikuji-remaining"></div>
 
+    <ul id="history" class="omikuji-history"></ul>
     <!-- TypeScript を読み込む（Vite が変換する）。 -->
     <script type="module" src="/src/main.ts"></script>
   </body>
