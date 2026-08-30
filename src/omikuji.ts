@@ -16,7 +16,11 @@ export const omikujiRatios: Record<OmikujiResult, number> = {
   末吉: 20,
   凶: 10,
 };
-
+// 輪廻転生の永続アップグレードなど、外部から比率を変えたいときの入口関数。
+// omikujiRatios を直接書き換えさせず、必ずここを通す（マイナスにならない安全策も一括で効かせるため）。
+export function adjustRatio(result: OmikujiResult, amount: number): void {
+  omikujiRatios[result] = Math.max(0, omikujiRatios[result] + amount);
+}
 // 箱の中身（引けるくじ）。このファイルの中だけで使う。
 // export していないので外部からは直接触れず、下の関数を通して操作する。
 let tickets: OmikujiResult[] = [];
@@ -50,3 +54,33 @@ export function drawOmikuji(): OmikujiResult | null {
 
 // 拡張ポイント（ステップ2以降）。必要になったら足す。
 //  - 残りくじ枚数を出す: tickets.length を返す関数をこのファイルに足す（tickets は外から読めない）。
+
+// 箱を引き切ったかどうか。reincarnation.ts が「転生できるか」の判定に使う。
+export function isOmikujiBoxEmpty(): boolean {
+  return tickets.length === 0;
+}
+
+// 残り枚数（合計）。isOmikujiBoxEmpty と同じく tickets.length を返すだけ。
+export function getRemainingCount(): number {
+  return tickets.length;
+}
+
+// 結果ごとの残り枚数の内訳を返す。
+// omikujiRatios と同じ形（6種類すべて0で初期化）にしてから、
+// tickets の中身を1枚ずつ数え上げていく。
+export function getRemainingCounts(): Record<OmikujiResult, number> {
+  const counts: Record<OmikujiResult, number> = {
+    大吉: 0,
+    中吉: 0,
+    小吉: 0,
+    吉: 0,
+    末吉: 0,
+    凶: 0,
+  };
+
+  for (const ticket of tickets) {
+    counts[ticket] += 1;
+  }
+
+  return counts;
+}

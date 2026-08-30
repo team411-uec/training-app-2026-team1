@@ -32,6 +32,36 @@
         font-size: 16px;
         cursor: pointer;
       }
+
+      .result-daikichi {
+        background-color: #d4af37;
+        color: #3a2f00;
+      }
+
+      .result-chukichi {
+        background-color: #4a90d9;
+        color: #ffffff;
+      }
+
+      .result-shokichi {
+        background-color: #4caf50;
+        color: #ffffff;
+      }
+
+      .result-kichi {
+        background-color: #ff9800;
+        color: #3a2200;
+      }
+
+      .result-sueyoshi {
+        background-color: #00acc1;
+        color: #ffffff;
+      }
+
+      .result-kyou {
+        background-color: #000000;
+        color: #ffffff;
+      }
     </style>
   </head>
 
@@ -48,7 +78,19 @@
     <!-- 操作ボタン。クリック時の処理は main.ts で結びつけている。 -->
     <div class="omikuji-controls">
       <button id="draw-button">おみくじを引く</button>
-      <button id="reset-button">リセット</button>
+      <button id="reincarnate-button">輪廻転生する</button>
+    </div>
+
+    <div class="omikuji-controls">
+      <button id="upgrade-button-1"></button>
+      <button id="upgrade-button-2"></button>
+      <button id="upgrade-button-3"></button>
+      <button id="upgrade-button-4"></button>
+      <button id="luck-upgrade-button-1"></button>
+      <button id="luck-upgrade-button-2"></button>
+      <button id="luck-upgrade-button-3"></button>
+      <button id="luck-upgrade-button-4"></button>
+      <button id="luck-upgrade-button-5"></button>
     </div>
 
     <!--
@@ -58,6 +100,12 @@
     -->
     <div id="remaining" class="omikuji-remaining"></div>
     <ul id="history" class="omikuji-history"></ul>
+
+    <div id="click-progress" class="omikuji-remaining"></div>
+
+    <div id="tokens" class="omikuji-remaining"></div>
+
+    <div id="reincarnation-points" class="omikuji-remaining"></div>
 
     <!-- TypeScript を読み込む（Vite が変換する）。 -->
     <script type="module" src="/src/main.ts"></script>
